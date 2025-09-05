@@ -8,3 +8,4 @@
 dnf install libxcrypt-compat
 dnf install libnsl
 /opt/lampp/lampp start
+
