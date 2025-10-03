@@ -13,8 +13,8 @@
     </header>
 
     <nav>
-        <a href="/DemoExam/Moy_Ne_Sam">Главная</a>
-        <a href="/DemoExam/Moy_Ne_Sam/admin">Админ-панель</a>
+        <a href="/DemoExam/NarusheniyamNet">Главная</a>
+        <a href="/DemoExam/NarusheniyamNet/admin">Админ-панель</a>
     </nav>
 
     <main>    
