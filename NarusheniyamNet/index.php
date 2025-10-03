@@ -9,7 +9,7 @@
 </head>
 <body>
     <header> <img src='images/logo.jpg' alt='логотип'>
-        <h1>мой не сам</h1>
+        <h1>НарушениямНет</h1>
     </header>
 
     <nav>
