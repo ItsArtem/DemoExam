@@ -52,6 +52,6 @@ ____
     - [X] другие записи, в которых Вы есть на фото
     - [ ] 
 - [ ] Сертификаты: создайте папку "Сертификаты" на СВОЕМ гугл диске, в ней должны быть папки с указанием конкурса и года (пример: Траектория будущего 24-25) и дайте на нее ссылку
-    - [ ] [Скрины результатов](http://example.com)          
+    - [ ] [Скрины результатов](https://drive.google.com/drive/folders/1CEMeo9RWwkOZiO4R4Iil4OvVVGoW3FT6?usp=sharing))          
          <br><mg src="https://github.com/user-attachments/assets/22de82ab-d888-4619-a894-e55b0f8fc4fc" alt="Практическая 2" height="100" />
 
