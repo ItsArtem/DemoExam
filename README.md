@@ -1,4 +1,4 @@
-<img width="1280" height="960" alt="image" src="https://github.com/user-attachments/assets/78613ed1-6e7f-4cb1-9880-872eaddfcf8e" /># Оформление заданий за семестр
+# Оформление заданий за семестр
 
 ## Мой не сам
 ____
