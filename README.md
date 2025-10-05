@@ -37,7 +37,7 @@ ____
     - [X] [Лёгкая атлетика 2025](https://t.me/luberteh/6749)
     - [X] [Зональный этап турнира по волейболу 2025](https://t.me/luberteh/6231)
     - [X] [Этап между корпусами турнира по волейболу 2025](https://t.me/luberteh/5858)
-- [ ] Сертификаты:
-    - [ ] [IT-диктант](https://drive.google.com/file/d/1KyHjyAMbUvDUZK7XxMgP_DH_H85CLjlj/view?usp=sharing)
+- [X] Сертификаты:
+    - [X] [IT-диктант](https://drive.google.com/file/d/1KyHjyAMbUvDUZK7XxMgP_DH_H85CLjlj/view?usp=sharing)
          <br><mg src="https://github.com/user-attachments/assets/22de82ab-d888-4619-a894-e55b0f8fc4fc" alt="Практическая 2" height="100" />
 
