@@ -1,4 +1,4 @@
-# Оформление заданий за семестр
+<img width="1280" height="960" alt="image" src="https://github.com/user-attachments/assets/78613ed1-6e7f-4cb1-9880-872eaddfcf8e" /># Оформление заданий за семестр
 
 ## Мой не сам
 ____
@@ -34,8 +34,10 @@ ____
 ## Участие в жизни техникума (саморазвитие)
 ____
 - [X] Поставить реакцию на запись в телеграмм, если Вы в ней присутствуете 
-    - [X] другие записи, в которых Вы есть на фото
-- [ ] Сертификаты: создайте папку "Сертификаты" на СВОЕМ гугл диске, в ней должны быть папки с указанием конкурса и года (пример: Траектория будущего 24-25) и дайте на нее ссылку
-    - [ ] [Скрины результатов](https://drive.google.com/drive/folders/1CEMeo9RWwkOZiO4R4Iil4OvVVGoW3FT6?usp=sharing))          
+    - [X] [Лёгкая атлетика 2025](https://t.me/luberteh/6749)
+    - [X] [Зональный этап турнира по волейболу 2025](https://t.me/luberteh/6231)
+    - [X] [Этап между корпусами турнира по волейболу 2025](https://t.me/luberteh/5858)
+- [ ] Сертификаты:
+    - [ ] [IT-диктант](https://drive.google.com/file/d/1KyHjyAMbUvDUZK7XxMgP_DH_H85CLjlj/view?usp=sharing)
          <br><mg src="https://github.com/user-attachments/assets/22de82ab-d888-4619-a894-e55b0f8fc4fc" alt="Практическая 2" height="100" />
 
