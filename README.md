@@ -21,11 +21,11 @@ ____
 - [X] Задание ссылка на [документ](https://docs.google.com/document/d/1UkbRrwteRXstQpRlTIiFRyGz3oMk5dBb/edit?usp=sharing&ouid=109271702560375882166&rtpof=true&sd=true)
     - [X] Выделены таблицы
     - [X] Выделены данные в таблицах
-- [ ] База данных ссылка на [таблицу](https://docs.google.com/spreadsheets/d/11bC6lH95Zd3dzG6WXawiKK56130SDOG5NzhApmTsCQI/edit?usp=sharing) и скрипт
+- [X] База данных ссылка на [таблицу](https://docs.google.com/spreadsheets/d/11bC6lH95Zd3dzG6WXawiKK56130SDOG5NzhApmTsCQI/edit?usp=sharing) и [скрипт](https://drive.google.com/file/d/19ipi54rUpOWHdK6RNLZq7RCWJOaeqjPX/view?usp=sharing)
     - [X] Лист гугл таблицы на котором все данные
-    - [ ] Скрин ER диаграммы на этом же листе
+    - [X] Скрин ER диаграммы на этом же листе
     - [X] Листы с данными для импорта
-    - [ ] Файл скрипта .sql
+    - [X] Файл скрипта .sql
 - [X] Код должен быть в папке
     - [X] Иконка, логотип и название
     - [X] Навигационная панель и ссылки работают
