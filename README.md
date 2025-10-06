@@ -40,5 +40,6 @@ ____
     - [X] [Разговоры о важном 8 сентября](https://t.me/luberteh/7170)
 - [X] Сертификаты:
     - [X] [IT-диктант](https://drive.google.com/file/d/1KyHjyAMbUvDUZK7XxMgP_DH_H85CLjlj/view?usp=sharing)
+    - [ ] [All Cups ИИ олимпиада](https://drive.google.com/file/d/1dxO2tOyEEcDC0GEmJPD-FqsyiVkc5mYG/view?usp=sharing)
          <br><mg src="https://github.com/user-attachments/assets/22de82ab-d888-4619-a894-e55b0f8fc4fc" alt="Практическая 2" height="100" />
 
