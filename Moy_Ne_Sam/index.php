@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>мой не сам</title>
-    <link rel='icon' href='images/logo.jpg'>
+    <title>Мой не сам</title>
+    <link rel='icon' href='images/logo.jpeg'>
     <link rel='stylesheet' href='css/style.css'>
 </head>
 <body>
-    <header> <img src='images/logo.jpg' alt='логотип'>
-        <h1>НарушениямНет</h1>
+    <header> <img src='images/logo.jpeg' alt='логотип'>
+        <h1>Мой не Сам</h1>
     </header>
 
     <nav>
@@ -18,6 +18,14 @@
     </nav>
 
     <main>    
+        <h1>Авторизация</h1>
+        <label for="">Логин</label>
+        <input type="text" name="login">
+
+        <label for="">Пароль</label>
+        <input type="text" name="password">
+        <button>Вход</button>
+        <p class="error"></p>
         <footer>
             <h3>2025</h3>
         <footer>
