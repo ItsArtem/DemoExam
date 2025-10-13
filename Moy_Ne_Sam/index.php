@@ -1,3 +1,6 @@
+<?php
+require_once "db/db.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +28,11 @@
         <label for="">Пароль</label>
         <input type="text" name="password">
         <button>Вход</button>
-        <p class="error"></p>
+        <p class="error">
+        <?php
+            echo find();
+        ?>
+        </p>
         <footer>
             <h3>2025</h3>
         <footer>
