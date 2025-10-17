@@ -1,5 +1,6 @@
 <?php
 require_once "db/db.php";
+require_once "header-nav.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,31 +12,37 @@ require_once "db/db.php";
     <link rel='stylesheet' href='css/style.css'>
 </head>
 <body>
-    <header> <img src='images/logo.jpeg' alt='логотип'>
-        <h1>Мой не Сам</h1>
-    </header>
-
-    <nav>
-        <a href="/DemoExam/Moy_Ne_Sam">Главная</a>
-        <a href="/DemoExam/Moy_Ne_Sam/admin">Админ-панель</a>
-    </nav>
 
     <main>    
-        <h1>Авторизация</h1>
-        <label for="">Логин</label>
-        <input type="text" name="login">
-
-        <label for="">Пароль</label>
-        <input type="text" name="password">
+        <h1>Авторизация</h1> 
+        <form>
+        <label>Логин
+            <input type="text" name="login"> 
+        </label> 
+        <label>Пароль
+            <input type="text" name="password"> 
+        </label> 
         <button>Вход</button>
+        </form> 
         <p class="error">
-        <?php
-            echo find();
-        ?>
+            <?php
+            $password=strip_tags($_GET["password"] ?? "");
+            $login=strip_tags($_GET["login"] ?? "");
+            if ($login && $password){                
+                //echo find($login,$password);
+                if (find($login, $password)) {
+                    echo "Успешная авторизация: " . $login . ", " . $password;
+                } else {
+                    echo "Ошибка авторизации: " . $login . ", " . $password . " - error";
+                }
+            }
+            //echo "find($login,$password)";
+            
+            ?>
         </p>
-        <footer>
-            <h3>2025</h3>
-        <footer>
+        <?php
+        require_once "footer.php";
+        ?>
     </main>
 
     <script src="js/script.js"></script>
