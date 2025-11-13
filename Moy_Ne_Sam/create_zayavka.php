@@ -1,5 +1,5 @@
 <?php
-$pageTitle = 'Список заявок';
+$pageTitle = 'Создать заявку';
 require_once "struktura.php";
 ?>
     <main>    
