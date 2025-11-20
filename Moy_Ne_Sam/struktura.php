@@ -46,15 +46,6 @@ if (isset($_SESSION['user'])) {
         <img src='images/logo.jpeg' alt='логотип'>
         <h1>Мой не сам</h1>
     </header>
-<!--
-    <nav>
-        <a href="index.php">Авторизация</a>
-        <a href="registration.php">Регистрация</a>
-        <a href="create_zayavka.php">Создать заявку</a>
-        <a href="zayavka.php">Список заявок</a>
-        <a href="admin.php">Панель администратора</a>
-    </nav>
--->
 
     <nav>
         <?php foreach ($navLinks as $link): ?>
