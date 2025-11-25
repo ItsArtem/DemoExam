@@ -1,6 +1,6 @@
 <?php
 $pageTitle = 'Список заявок';
-require_once "struktura.php";
+require_once "db/db.php";
 
 // Проверка авторизации
 if (!isset($_SESSION['user'])) {
@@ -10,7 +10,7 @@ if (!isset($_SESSION['user'])) {
 
 $user_id = $_SESSION['user']['id_user'];
 
-// Получаем заявки пользователя с присоединением справочников для читаемости
+// Получаем заявки пользователя
 $query = "
     SELECT s.id_service, s.address, s.data, s.time, st.name_service, pt.name_pay, stat.name_status
     FROM service s
@@ -27,39 +27,51 @@ mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 $zayavki = mysqli_fetch_all($result, MYSQLI_ASSOC);
 mysqli_stmt_close($stmt);
+
+// Формируем контент страницы
+ob_start();
 ?>
-<main>
-    <h1>Мои заявки</h1>
 
-    <?php if (empty($zayavki)): ?>
+<h1>Мои заявки</h1>
+
+<?php if (empty($zayavki)): ?>
+    <div class="no-zayavki">
         <p>У вас пока нет заявок.</p>
-    <?php else: ?>
-        <table border="1" cellpadding="8" cellspacing="0" style="width: 100%; border-collapse: collapse;">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Адрес</th>
-                    <th>Услуга</th>
-                    <th>Дата и время</th>
-                    <th>Оплата</th>
-                    <th>Статус</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($zayavki as $z): ?>
-                    <tr>
-                        <td><?= htmlspecialchars($z['id_service']) ?></td>
-                        <td><?= htmlspecialchars($z['address']) ?></td>
-                        <td><?= htmlspecialchars($z['name_service']) ?></td>
-                        <td><?= htmlspecialchars($z['data'] . ' ' . $z['time']) ?></td>
-                        <td><?= htmlspecialchars($z['name_pay']) ?></td>
-                        <td><?= htmlspecialchars($z['name_status']) ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    <?php endif; ?>
+        <a href="create_zayavka.php" class="create-link">Создать первую заявку</a>
+    </div>
+<?php else: ?>
+    <div class="cards-container">
+        <?php foreach ($zayavki as $z): ?>
+            <div class="card">
+                <div class="card-header">
+                    Заявка #<?= htmlspecialchars($z['id_service']) ?>
+                </div>
+                <div class="card-field">
+                    <strong>Адрес:</strong> <?= htmlspecialchars($z['address']) ?>
+                </div>
+                <div class="card-field">
+                    <strong>Услуга:</strong> <?= htmlspecialchars($z['name_service']) ?>
+                </div>
+                <div class="card-field">
+                    <strong>Дата:</strong> <?= htmlspecialchars($z['data']) ?>
+                </div>
+                <div class="card-field">
+                    <strong>Время:</strong> <?= htmlspecialchars($z['time']) ?>
+                </div>
+                <div class="card-field">
+                    <strong>Оплата:</strong> <?= htmlspecialchars($z['name_pay']) ?>
+                </div>
+                <div class="card-field">
+                    <strong>Статус:</strong> <?= htmlspecialchars($z['name_status']) ?>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+    
+    <a href="create_zayavka.php" class="create-link">Создать новую заявку</a>
+<?php endif; ?>
 
-    <br>
-    <a href="create_zayavka.php">Создать новую заявку</a>
-</main>
+<?php
+$pageContent = ob_get_clean();
+require_once "struktura.php";
+?>
