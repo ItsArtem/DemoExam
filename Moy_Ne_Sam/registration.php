@@ -23,12 +23,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errors[] = "Пользователь с таким логином уже существует";
         }
     }
-    if (mysqli_query($db, $sql)) {
-        $success = "Регистрация прошла успешно! Теперь вы можете войти в систему.";
-        $login = $password = $surname = $name = $otchestvo = $phone = $email = '';
-    } else {
-        $errors[] = "Ошибка при регистрации: " . mysqli_error($db);
+        
+    // Если ошибок нет - регистрируем пользователя
+    if (empty($errors)) {
+        // user_type_id = 1 - обычный пользователь
+        $sql = "INSERT INTO user (user_type_id, surname, name, otchestvo, phone, email, username, password) 
+                VALUES ('1', '$surname', '$name', '$otchestvo', '$phone', '$email', '$login', MD5('$password'))";
+        
+        if (mysqli_query($db, $sql)) {
+            $success = "Регистрация прошла успешно! Теперь вы можете войти в систему.";
+            // Очищаем поля формы после успешной регистрации
+            $login = $password = $surname = $name = $otchestvo = $phone = $email = '';
+        } else {
+            $errors[] = "Ошибка при регистрации: " . mysqli_error($db);
+        }
     }
+
 }
 ?>
 <main>
