@@ -1,6 +1,10 @@
 <?php
 $pageTitle = 'Регистрация';
-require_once "struktura.php";
+
+$errors = [];
+$success = "";
+$login = $password = $surname = $name = $otchestvo = $phone = $email = '';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $login = trim($_POST['login'] ?? '');
     $password = trim($_POST['password'] ?? '');
@@ -9,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $otchestvo = trim($_POST['otchestvo'] ?? '');
     $phone = trim($_POST['phone'] ?? '');
     $email = trim($_POST['email'] ?? '');
+    
     $errors = [];
     if (empty($login)) $errors[] = "Логин обязателен для заполнения";
     if (empty($password)) $errors[] = "Пароль обязателен для заполнения";
@@ -17,6 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($otchestvo)) $errors[] = "Отчество обязательно для заполнения";
     if (empty($phone)) $errors[] = "Телефон обязателен для заполнения";
     if (empty($email)) $errors[] = "Email обязателен для заполнения";
+    
     if (!empty($login)) {
         $check_login = mysqli_query($db, "SELECT id_user FROM user WHERE username = '$login'");
         if (mysqli_num_rows($check_login) > 0) {
@@ -38,38 +44,70 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errors[] = "Ошибка при регистрации: " . mysqli_error($db);
         }
     }
-
 }
+
+// Формируем контент страницы
+ob_start();
 ?>
-<main>
-    <?php if (!empty($errors)): ?>
+
+<?php if (!empty($errors)): ?>
+    <div class="error">
         <ul>
             <?php foreach ($errors as $error): ?>
                 <li><?php echo htmlspecialchars($error); ?></li>
             <?php endforeach; ?>
         </ul>
-    <?php endif; ?>
-    <?php if (isset($success)): ?>
-        <div class="">
-            <?php echo htmlspecialchars($success); ?>
-        </div>
-    <?php endif; ?>
-    <form method="POST" action="">
+    </div>
+<?php endif; ?>
+
+<?php if (isset($success) && !empty($success)): ?>
+    <div class="success">
+        <?php echo htmlspecialchars($success); ?>
+    </div>
+<?php endif; ?>
+
+<form method="POST" action="">
+    <div>
         <label for="login">Логин *</label>
-        <input type="text" name="login" id="login" value="<?php echo htmlspecialchars($login ?? ''); ?>" required><br>
+        <input type="text" name="login" id="login" value="<?php echo htmlspecialchars($login); ?>" required>
+    </div>
+    
+    <div>
         <label for="password">Пароль *</label>
-        <input type="password" name="password" id="password" value="<?php echo htmlspecialchars($password ?? ''); ?>" required><br>
+        <input type="password" name="password" id="password" value="<?php echo htmlspecialchars($password); ?>" required>
+    </div>
+    
+    <div>
         <label for="surname">Фамилия *</label>
-        <input type="text" name="surname" id="surname" value="<?php echo htmlspecialchars($surname ?? ''); ?>" required><br>
+        <input type="text" name="surname" id="surname" value="<?php echo htmlspecialchars($surname); ?>" required>
+    </div>
+    
+    <div>
         <label for="name">Имя *</label>
-        <input type="text" name="name" id="name" value="<?php echo htmlspecialchars($name ?? ''); ?>" required><br>
+        <input type="text" name="name" id="name" value="<?php echo htmlspecialchars($name); ?>" required>
+    </div>
+    
+    <div>
         <label for="otchestvo">Отчество *</label>
-        <input type="text" name="otchestvo" id="otchestvo" value="<?php echo htmlspecialchars($otchestvo ?? ''); ?>" required><br>
+        <input type="text" name="otchestvo" id="otchestvo" value="<?php echo htmlspecialchars($otchestvo); ?>" required>
+    </div>
+    
+    <div>
         <label for="phone">Телефон *</label>
-        <input type="tel" name="phone" id="phone" value="<?php echo htmlspecialchars($phone ?? ''); ?>" required><br>
+        <input type="tel" name="phone" id="phone" value="<?php echo htmlspecialchars($phone); ?>" required>
+    </div>
+    
+    <div>
         <label for="email">Email *</label>
-        <input type="email" name="email" id="email" value="<?php echo htmlspecialchars($email ?? ''); ?>" required><br>
-        <button type="submit">Зарегистрироваться</button>
-    </form>
-    <p>Уже есть аккаунт? <a href="index.php">Войдите здесь</a></p>
-</main>
+        <input type="email" name="email" id="email" value="<?php echo htmlspecialchars($email); ?>" required>
+    </div>
+    
+    <button type="submit">Зарегистрироваться</button>
+</form>
+
+<p>Уже есть аккаунт? <a href="index.php">Войдите здесь</a></p>
+
+<?php
+$pageContent = ob_get_clean();
+require_once "struktura.php";
+?>

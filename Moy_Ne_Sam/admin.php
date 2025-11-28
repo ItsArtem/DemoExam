@@ -1,4 +1,5 @@
 <?php
+$pageTitle = "Панель администратора";
 require_once "db/db.php";
 
 // Проверка авторизации и прав администратора
@@ -7,7 +8,6 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['user_type_id'] != 2) {
     exit();
 }
 
-$pageTitle = "Панель администратора";
 $message = "";
 
 // Обработка изменения статуса заявки
@@ -39,83 +39,70 @@ $statuses = [];
 while ($row = mysqli_fetch_assoc($statuses_query)) {
     $statuses[$row['id_status']] = $row;
 }
+
+// Формируем контент страницы
+ob_start();
 ?>
 
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Панель администратора - Мой не сам</title>
-    <style>
-        .message { padding: 10px; margin: 10px 0; border-radius: 5px; }
-        .success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
-        .error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
-        table { border-collapse: collapse; width: 100%; margin: 20px 0; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-        th { background-color: #f2f2f2; }
-        select, button { padding: 5px; margin: 2px; }
-    </style>
-</head>
-<body>
-    <h1>Панель администратора</h1>
-    
-    <?php if ($message): ?>
-        <div class="message <?php echo strpos($message, 'успешно') !== false ? 'success' : 'error'; ?>">
-            <?php echo $message; ?>
-        </div>
-    <?php endif; ?>
+<?php if ($message): ?>
+    <div class="message <?php echo strpos($message, 'успешно') !== false ? 'success' : 'error'; ?>">
+        <?php echo $message; ?>
+    </div>
+<?php endif; ?>
 
-    <h2>Все заявки</h2>
-    
-    <?php if ($services_result && mysqli_num_rows($services_result) > 0): ?>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Клиент</th>
-                    <th>Адрес</th>
-                    <th>Услуга</th>
-                    <th>Дата</th>
-                    <th>Время</th>
-                    <th>Тип оплаты</th>
-                    <th>Статус</th>
-                    <th>Действие</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php while ($service = mysqli_fetch_assoc($services_result)): ?>
-                <tr>
-                    <td><?php echo $service['id_service']; ?></td>
-                    <td><?php echo htmlspecialchars($service['surname'] . ' ' . $service['name'] . ' ' . $service['otchestvo']); ?></td>
-                    <td><?php echo htmlspecialchars($service['address']); ?></td>
-                    <td><?php echo htmlspecialchars($service['name_service']); ?></td>
-                    <td><?php echo htmlspecialchars($service['data']); ?></td>
-                    <td><?php echo htmlspecialchars($service['time']); ?></td>
-                    <td><?php echo htmlspecialchars($service['name_pay']); ?></td>
-                    <td><?php echo htmlspecialchars($service['name_status']); ?></td>
-                    <td>
-                        <form method="POST" style="display: inline;">
-                            <input type="hidden" name="service_id" value="<?php echo $service['id_service']; ?>">
-                            <select name="status_id" required>
-                                <option value="">Выберите статус</option>
-                                <?php foreach ($statuses as $id => $status): ?>
-                                    <option value="<?php echo $id; ?>" <?php echo $id == $service['status_id'] ? 'selected' : ''; ?>>
-                                        <?php echo htmlspecialchars($status['name_status']); ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </select>
-                            <button type="submit" name="change_status">Изменить</button>
-                        </form>
-                    </td>
-                </tr>
-                <?php endwhile; ?>
-            </tbody>
-        </table>
-    <?php else: ?>
-        <p>Заявок нет.</p>
-    <?php endif; ?>
+<h2>Все заявки</h2>
 
-    <p><a href="zayavka.php">Вернуться к списку заявок</a></p>
-</body>
-</html>
+<?php if ($services_result && mysqli_num_rows($services_result) > 0): ?>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Клиент</th>
+                <th>Адрес</th>
+                <th>Услуга</th>
+                <th>Дата</th>
+                <th>Время</th>
+                <th>Тип оплаты</th>
+                <th>Статус</th>
+                <th>Действие</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php while ($service = mysqli_fetch_assoc($services_result)): ?>
+            <tr>
+                <td><?php echo $service['id_service']; ?></td>
+                <td><?php echo htmlspecialchars($service['surname'] . ' ' . $service['name'] . ' ' . $service['otchestvo']); ?></td>
+                <td><?php echo htmlspecialchars($service['address']); ?></td>
+                <td><?php echo htmlspecialchars($service['name_service']); ?></td>
+                <td><?php echo htmlspecialchars($service['data']); ?></td>
+                <td><?php echo htmlspecialchars($service['time']); ?></td>
+                <td><?php echo htmlspecialchars($service['name_pay']); ?></td>
+                <td><?php echo htmlspecialchars($service['name_status']); ?></td>
+                <td>
+                    <form method="POST" style="display: inline;">
+                        <input type="hidden" name="service_id" value="<?php echo $service['id_service']; ?>">
+                        <select name="status_id" required>
+                            <option value="">Выберите статус</option>
+                            <?php foreach ($statuses as $id => $status): ?>
+                                <option value="<?php echo $id; ?>" <?php echo $id == $service['status_id'] ? 'selected' : ''; ?>>
+                                    <?php echo htmlspecialchars($status['name_status']); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                        <button type="submit" name="change_status">Изменить</button>
+                    </form>
+                </td>
+            </tr>
+            <?php endwhile; ?>
+        </tbody>
+    </table>
+<?php else: ?>
+    <p>Заявок нет.</p>
+<?php endif; ?>
+
+<p><a href="zayavka.php">Вернуться к списку заявок</a></p>
+
+<?php
+$pageContent = ob_get_clean();
+require_once "struktura.php";
+?>

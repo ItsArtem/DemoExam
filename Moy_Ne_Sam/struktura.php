@@ -56,13 +56,17 @@ if (isset($_SESSION['user'])) {
     <main>
         <h1><?php echo $pageTitle;?></h1>
         <div class="content">
-            <?php echo $pageContent ?? '';?>
+            <?php 
+            if (isset($pageContent) && !empty($pageContent)) {
+                echo $pageContent;
+            } else {
+            }
+            ?>
         </div>
         <footer>
             <h3>2025</h3>
         </footer>
     </main>
-
 
     <script src="js/script.js"></script>
 </body>

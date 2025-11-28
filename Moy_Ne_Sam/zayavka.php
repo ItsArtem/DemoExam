@@ -32,15 +32,15 @@ mysqli_stmt_close($stmt);
 ob_start();
 ?>
 
-<h1>Мои заявки</h1>
-
 <?php if (empty($zayavki)): ?>
     <div class="no-zayavki">
         <p>У вас пока нет заявок.</p>
         <a href="create_zayavka.php" class="create-link">Создать первую заявку</a>
     </div>
 <?php else: ?>
-    <div class="cards-container">
+
+    
+   <div class="cards-container">
         <?php foreach ($zayavki as $z): ?>
             <div class="card">
                 <div class="card-header">
