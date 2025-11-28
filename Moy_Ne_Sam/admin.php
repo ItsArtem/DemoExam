@@ -45,7 +45,7 @@ ob_start();
 ?>
 
 <?php if ($message): ?>
-    <div class="message <?php echo strpos($message, 'успешно') !== false ? 'success' : 'error'; ?>">
+    <div class="<?php echo strpos($message, 'успешно') !== false ? 'success' : 'error'; ?>">
         <?php echo $message; ?>
     </div>
 <?php endif; ?>
@@ -53,54 +53,82 @@ ob_start();
 <h2>Все заявки</h2>
 
 <?php if ($services_result && mysqli_num_rows($services_result) > 0): ?>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Клиент</th>
-                <th>Адрес</th>
-                <th>Услуга</th>
-                <th>Дата</th>
-                <th>Время</th>
-                <th>Тип оплаты</th>
-                <th>Статус</th>
-                <th>Действие</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php while ($service = mysqli_fetch_assoc($services_result)): ?>
-            <tr>
-                <td><?php echo $service['id_service']; ?></td>
-                <td><?php echo htmlspecialchars($service['surname'] . ' ' . $service['name'] . ' ' . $service['otchestvo']); ?></td>
-                <td><?php echo htmlspecialchars($service['address']); ?></td>
-                <td><?php echo htmlspecialchars($service['name_service']); ?></td>
-                <td><?php echo htmlspecialchars($service['data']); ?></td>
-                <td><?php echo htmlspecialchars($service['time']); ?></td>
-                <td><?php echo htmlspecialchars($service['name_pay']); ?></td>
-                <td><?php echo htmlspecialchars($service['name_status']); ?></td>
-                <td>
-                    <form method="POST" style="display: inline;">
-                        <input type="hidden" name="service_id" value="<?php echo $service['id_service']; ?>">
-                        <select name="status_id" required>
+    <div class="cards-container">
+        <?php while ($service = mysqli_fetch_assoc($services_result)): ?>
+            <div class="card">
+                <div class="card-header">
+                    Заявка #<?= $service['id_service'] ?>
+                    <span style="
+                        padding: 4px 8px; 
+                        border-radius: 4px; 
+                        font-size: 12px; 
+                        font-weight: normal;
+                        background-color: <?= 
+                            $service['status_id'] == 1 ? '#e3f2fd' : 
+                            ($service['status_id'] == 2 ? '#fff3e0' : 
+                            ($service['status_id'] == 3 ? '#e8f5e8' : '#ffebee')) 
+                        ?>;
+                        color: <?= 
+                            $service['status_id'] == 1 ? '#1976d2' : 
+                            ($service['status_id'] == 2 ? '#f57c00' : 
+                            ($service['status_id'] == 3 ? '#388e3c' : '#d32f2f')) 
+                        ?>;
+                    ">
+                        <?= htmlspecialchars($service['name_status']) ?>
+                    </span>
+                </div>
+                <div class="card-field">
+                    <strong>Клиент:</strong> <?= htmlspecialchars($service['surname'] . ' ' . $service['name'] . ' ' . $service['otchestvo']) ?>
+                </div>
+                <div class="card-field">
+                    <strong>Адрес:</strong> <?= htmlspecialchars($service['address']) ?>
+                </div>
+                <div class="card-field">
+                    <strong>Услуга:</strong> <?= htmlspecialchars($service['name_service']) ?>
+                </div>
+                <div class="card-field">
+                    <strong>Дата:</strong> <?= htmlspecialchars($service['data']) ?>
+                </div>
+                <div class="card-field">
+                    <strong>Время:</strong> <?= htmlspecialchars($service['time']) ?>
+                </div>
+                <div class="card-field">
+                    <strong>Тип оплаты:</strong> <?= htmlspecialchars($service['name_pay']) ?>
+                </div>
+                <div class="card-field">
+                    <strong>Контакты:</strong> <?= htmlspecialchars($service['reason_cancel'] ?? 'Не указаны') ?>
+                </div>
+                <div style="margin-top: 15px; padding-top: 10px; border-top: 1px solid #eee;">
+                    <form method="POST" style="display: flex; flex-direction: column; gap: 10px;">
+                        <input type="hidden" name="service_id" value="<?= $service['id_service'] ?>">
+                        <select name="status_id" required style="padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
                             <option value="">Выберите статус</option>
                             <?php foreach ($statuses as $id => $status): ?>
-                                <option value="<?php echo $id; ?>" <?php echo $id == $service['status_id'] ? 'selected' : ''; ?>>
-                                    <?php echo htmlspecialchars($status['name_status']); ?>
+                                <option value="<?= $id ?>" <?= $id == $service['status_id'] ? 'selected' : '' ?>>
+                                    <?= htmlspecialchars($status['name_status']) ?>
                                 </option>
                             <?php endforeach; ?>
                         </select>
-                        <button type="submit" name="change_status">Изменить</button>
+                        <button type="submit" name="change_status" style="
+                            padding: 8px 16px; 
+                            background-color: #007bff; 
+                            color: white; 
+                            border: none; 
+                            border-radius: 4px; 
+                            cursor: pointer;
+                        ">
+                            Изменить статус
+                        </button>
                     </form>
-                </td>
-            </tr>
-            <?php endwhile; ?>
-        </tbody>
-    </table>
+                </div>
+            </div>
+        <?php endwhile; ?>
+    </div>
 <?php else: ?>
     <p>Заявок нет.</p>
 <?php endif; ?>
 
-<p><a href="zayavka.php">Вернуться к списку заявок</a></p>
+<p class="text-center mt-20"><a href="zayavka.php" class="create-link">Вернуться к списку заявок</a></p>
 
 <?php
 $pageContent = ob_get_clean();
