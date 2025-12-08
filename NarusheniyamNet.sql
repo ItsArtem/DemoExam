@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost
--- Время создания: Ноя 28 2025 г., 11:08
+-- Время создания: Дек 08 2025 г., 21:41
 -- Версия сервера: 10.4.32-MariaDB
 -- Версия PHP: 8.2.12
 
@@ -29,6 +29,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `service` (
   `id_service` int(1) NOT NULL,
+  `car_number` varchar(20) NOT NULL,
+  `violation_description` text NOT NULL,
   `address` text NOT NULL,
   `user_id` int(1) NOT NULL,
   `data` date NOT NULL,
@@ -40,16 +42,9 @@ CREATE TABLE `service` (
 -- Дамп данных таблицы `service`
 --
 
-INSERT INTO `service` (`id_service`, `address`, `user_id`, `data`, `time`, `status_id`) VALUES
-(1, 'ул. Пушкина, д. 1', 1, '2025-10-21', '18:00:00', 1),
-(2, 'ул. Пушкина, д. 2', 1, '2025-10-21', '19:00:00', 1),
-(3, 'ул. Пушкина, д. 3', 1, '2025-10-21', '20:00:00', 1),
-(4, 'Московская обл., ул. Пушкина, д. 12', 4, '2025-11-30', '15:44:00', 1),
-(5, 'ул. ААА, д. 111', 2, '2025-11-30', '20:00:00', 2),
-(6, 'ул. ААА, д. 111', 2, '2025-11-30', '20:00:00', 3),
-(7, 'ул. ААА, д. 1123', 2, '2025-11-22', '14:00:00', 1),
-(8, '9', 6, '0009-09-09', '09:09:00', 1),
-(9, 'вава вавав вавав ', 2, '2025-11-30', '15:28:00', 1);
+INSERT INTO `service` (`id_service`, `car_number`, `violation_description`, `address`, `user_id`, `data`, `time`, `status_id`) VALUES
+(1, 'А123БВ777', 'Парковка в неположенном месте', 'ул. Пушкина, д. 1', 1, '2025-10-21', '18:00:00', 2),
+(10, 'А222ААА22', 'Сбил самокатчика', 'Ул. Пушкина, д. Колотушкина', 2, '2025-12-26', '04:38:00', 2);
 
 -- --------------------------------------------------------
 
@@ -94,7 +89,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `surname`, `name`, `otchestvo`, `phone`, `email`, `username`, `password`, `user_type_id`) VALUES
-(1, 'Мирон', 'Артем', 'Сергеевич', 89776016667, 'kymuskrolik@gmail.com', 'adminka', '5f4dcc3b5aa765d61d8327deb882cf99', 2),
+(1, 'Мирон', 'Артем', 'Сергеевич', 89776016667, 'kymuskrolik@gmail.com', 'copp', '5f4dcc3b5aa765d61d8327deb882cf99', 2),
 (2, 'test', 'test', 'test', 79999999999, 'test@mail.ru', 'test', '098f6bcd4621d373cade4e832627b4f6', 1),
 (3, 'test2', 'test2', 'test2', 79998887766, 'test2@mail.ru', 'test2', 'c4d8a57e2ca5dc5d71d2cf3dbbbbaabe', 1),
 (4, 'Фамилия1', 'Имя1', 'Отчество1', 81111111111, 'Email@email.email', 'xDaer', '220466675e31b9d20c051d5e57974150', 1),
@@ -161,7 +156,7 @@ ALTER TABLE `user_type`
 -- AUTO_INCREMENT для таблицы `service`
 --
 ALTER TABLE `service`
-  MODIFY `id_service` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_service` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT для таблицы `user`
