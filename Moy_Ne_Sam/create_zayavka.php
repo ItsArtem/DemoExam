@@ -60,63 +60,78 @@ if ($pay_type_query) {
 ob_start();
 ?>
 
-<?php if ($error): ?>
-    <div class="error"><?php echo $error; ?></div>
-<?php endif; ?>
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <?php if ($error): ?>
+            <div class="alert alert-danger"><?php echo $error; ?></div>
+        <?php endif; ?>
 
-<?php if ($success): ?>
-    <div class="success"><?php echo $success; ?></div>
-<?php endif; ?>
+        <?php if ($success): ?>
+            <div class="alert alert-success"><?php echo $success; ?></div>
+        <?php endif; ?>
 
-<form method="POST" action="">
-    <div>
-        <label for="address">Адрес:</label>
-        <input type="text" id="address" name="address" required style="width: 300px;" value="<?php echo isset($_POST['address']) ? htmlspecialchars($_POST['address']) : ''; ?>">
+        <div class="card shadow">
+            <div class="card-body">
+                <form method="POST" action="">
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Адрес:</label>
+                        <input type="text" id="address" name="address" class="form-control" 
+                               required value="<?php echo isset($_POST['address']) ? htmlspecialchars($_POST['address']) : ''; ?>">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="contact_data" class="form-label">Контактные данные:</label>
+                        <input type="text" id="contact_data" name="contact_data" class="form-control" 
+                               required placeholder="Телефон или email" 
+                               value="<?php echo isset($_POST['contact_data']) ? htmlspecialchars($_POST['contact_data']) : ''; ?>">
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="data" class="form-label">Желаемая дата:</label>
+                            <input type="date" id="data" name="data" class="form-control" 
+                                   required value="<?php echo isset($_POST['data']) ? htmlspecialchars($_POST['data']) : ''; ?>">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="time" class="form-label">Желаемое время:</label>
+                            <input type="time" id="time" name="time" class="form-control" 
+                                   required value="<?php echo isset($_POST['time']) ? htmlspecialchars($_POST['time']) : ''; ?>">
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="service_type_id" class="form-label">Вид услуги:</label>
+                        <select id="service_type_id" name="service_type_id" class="form-select" required>
+                            <option value="">-- Выберите услугу --</option>
+                            <?php foreach ($service_types as $id => $type): ?>
+                                <option value="<?php echo $id; ?>" <?php echo (isset($_POST['service_type_id']) && $_POST['service_type_id'] == $id) ? 'selected' : ''; ?>>
+                                    <?php echo htmlspecialchars($type['name_service']); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="pay_type_id" class="form-label">Тип оплаты:</label>
+                        <select id="pay_type_id" name="pay_type_id" class="form-select" required>
+                            <option value="">-- Выберите тип оплаты --</option>
+                            <?php foreach ($pay_types as $id => $type): ?>
+                                <option value="<?php echo $id; ?>" <?php echo (isset($_POST['pay_type_id']) && $_POST['pay_type_id'] == $id) ? 'selected' : ''; ?>>
+                                    <?php echo htmlspecialchars($type['name_pay']); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">Создать заявку</button>
+                        <a href="zayavka.php" class="btn btn-outline-secondary">Вернуться к списку заявок</a>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-    
-    <div>
-        <label for="contact_data">Контактные данные:</label>
-        <input type="text" id="contact_data" name="contact_data" required style="width: 300px;" 
-               placeholder="Телефон или email" value="<?php echo isset($_POST['contact_data']) ? htmlspecialchars($_POST['contact_data']) : ''; ?>">
-    </div>
-    
-    <div>
-        <label for="data">Желаемая дата:</label>
-        <input type="date" id="data" name="data" required value="<?php echo isset($_POST['data']) ? htmlspecialchars($_POST['data']) : ''; ?>">
-    </div>
-    
-    <div>
-        <label for="time">Желаемое время:</label>
-        <input type="time" id="time" name="time" required value="<?php echo isset($_POST['time']) ? htmlspecialchars($_POST['time']) : ''; ?>">
-    </div>
-    
-    <div>
-        <label for="service_type_id">Вид услуги:</label>
-        <select id="service_type_id" name="service_type_id" required>
-            <option value="">-- Выберите услугу --</option>
-            <?php foreach ($service_types as $id => $type): ?>
-                <option value="<?php echo $id; ?>" <?php echo (isset($_POST['service_type_id']) && $_POST['service_type_id'] == $id) ? 'selected' : ''; ?>>
-                    <?php echo htmlspecialchars($type['name_service']); ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
-    </div>
-    
-    <div>
-        <label for="pay_type_id">Тип оплаты:</label>
-        <select id="pay_type_id" name="pay_type_id" required>
-            <option value="">-- Выберите тип оплаты --</option>
-            <?php foreach ($pay_types as $id => $type): ?>
-                <option value="<?php echo $id; ?>" <?php echo (isset($_POST['pay_type_id']) && $_POST['pay_type_id'] == $id) ? 'selected' : ''; ?>>
-                    <?php echo htmlspecialchars($type['name_pay']); ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
-    </div>
-    
-    <button type="submit">Создать заявку</button>
-</form>
-<p><a href="zayavka.php">Вернуться к списку заявок</a></p>
+</div>
 
 <?php
 $pageContent = ob_get_clean();

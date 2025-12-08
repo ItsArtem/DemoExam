@@ -33,41 +33,72 @@ if (isset($_SESSION['user'])) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мой не сам  <?php echo $pageTitle; ?></title>
+    <title>Мой не сам - <?php echo $pageTitle; ?></title>
     <link rel='icon' href='images/logo.jpeg'>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Ваши стили -->
     <link rel='stylesheet' href='css/style.css'>
 </head>
-<body>
-    <header>
-        <img src='images/logo.jpeg' alt='логотип'>
-        <h1>Мой не сам</h1>
+<body class="d-flex flex-column min-vh-100">
+    <header class="bg-white shadow-sm">
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-center py-3">
+                <img src='images/logo.jpeg' alt='логотип' class="me-3" style="width: 80px; height: auto;">
+                <h1 class="h3 mb-0">Мой не сам</h1>
+            </div>
+        </div>
     </header>
 
-    <nav>
-        <?php foreach ($navLinks as $link): ?>
-            <a href="<?php echo htmlspecialchars($link['href']); ?>"><?php echo htmlspecialchars($link['text']); ?></a>
-        <?php endforeach; ?>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <?php foreach ($navLinks as $link): ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo htmlspecialchars($link['href']); ?>">
+                                <?php echo htmlspecialchars($link['text']); ?>
+                            </a>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        </div>
     </nav>
 
-    <main>
-        <h1><?php echo $pageTitle;?></h1>
-        <div class="content">
-            <?php 
-            if (isset($pageContent) && !empty($pageContent)) {
-                echo $pageContent;
-            } else {
-            }
-            ?>
+    <main class="flex-grow-1 py-4">
+        <div class="container">
+            <h1 class="h2 mb-4 text-center"><?php echo $pageTitle;?></h1>
+            <div class="content">
+                <?php 
+                if (isset($pageContent) && !empty($pageContent)) {
+                    echo $pageContent;
+                }
+                ?>
+            </div>
         </div>
-        <footer>
-            <h3>2025</h3>
-        </footer>
     </main>
 
+    <footer class="bg-dark text-white py-3 mt-auto">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h3 class="h6 mb-0">2025 &copy; Мой не сам</h3>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Ваши скрипты -->
     <script src="js/script.js"></script>
 </body>
 </html>

@@ -36,52 +36,64 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ob_start();
 ?>
 
-<?php if ($error): ?>
-    <div class="error"><?php echo $error; ?></div>
-<?php endif; ?>
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <h2 class="h3 mb-4">Сообщить о нарушении ПДД</h2>
+        
+        <?php if ($error): ?>
+            <div class="alert alert-danger"><?php echo $error; ?></div>
+        <?php endif; ?>
 
-<?php if ($success): ?>
-    <div class="success"><?php echo $success; ?></div>
-<?php endif; ?>
+        <?php if ($success): ?>
+            <div class="alert alert-success"><?php echo $success; ?></div>
+        <?php endif; ?>
 
-<h2>Сообщить о нарушении ПДД</h2>
-<form method="POST" action="">
-    <div>
-        <label for="car_number">Номер автомобиля *</label>
-        <input type="text" id="car_number" name="car_number" required 
-               placeholder="Например: А123БВ777" 
-               value="<?php echo isset($_POST['car_number']) ? htmlspecialchars($_POST['car_number']) : ''; ?>">
+        <div class="card shadow">
+            <div class="card-body">
+                <form method="POST" action="">
+                    <div class="mb-3">
+                        <label for="car_number" class="form-label">Номер автомобиля *</label>
+                        <input type="text" id="car_number" name="car_number" class="form-control" required 
+                               placeholder="Например: А123БВ777" 
+                               value="<?php echo isset($_POST['car_number']) ? htmlspecialchars($_POST['car_number']) : ''; ?>">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="violation_description" class="form-label">Описание нарушения *</label>
+                        <textarea id="violation_description" name="violation_description" class="form-control" required 
+                                  placeholder="Подробно опишите нарушение ПДД..." 
+                                  rows="4"><?php echo isset($_POST['violation_description']) ? htmlspecialchars($_POST['violation_description']) : ''; ?></textarea>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Место нарушения *</label>
+                        <input type="text" id="address" name="address" class="form-control" required 
+                               placeholder="Улица, дом, район" 
+                               value="<?php echo isset($_POST['address']) ? htmlspecialchars($_POST['address']) : ''; ?>">
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="data" class="form-label">Дата нарушения *</label>
+                            <input type="date" id="data" name="data" class="form-control" required 
+                                   value="<?php echo isset($_POST['data']) ? htmlspecialchars($_POST['data']) : ''; ?>">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="time" class="form-label">Время нарушения *</label>
+                            <input type="time" id="time" name="time" class="form-control" required 
+                                   value="<?php echo isset($_POST['time']) ? htmlspecialchars($_POST['time']) : ''; ?>">
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">Отправить заявление</button>
+                        <a href="zayavka.php" class="btn btn-outline-secondary">Вернуться к списку заявлений</a>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-    
-    <div>
-        <label for="violation_description">Описание нарушения *</label>
-        <textarea id="violation_description" name="violation_description" required 
-                  placeholder="Подробно опишите нарушение ПДД..." 
-                  rows="4"><?php echo isset($_POST['violation_description']) ? htmlspecialchars($_POST['violation_description']) : ''; ?></textarea>
-    </div>
-    
-    <div>
-        <label for="address">Место нарушения *</label>
-        <input type="text" id="address" name="address" required 
-               placeholder="Улица, дом, район" 
-               value="<?php echo isset($_POST['address']) ? htmlspecialchars($_POST['address']) : ''; ?>">
-    </div>
-    
-    <div>
-        <label for="data">Дата нарушения *</label>
-        <input type="date" id="data" name="data" required 
-               value="<?php echo isset($_POST['data']) ? htmlspecialchars($_POST['data']) : ''; ?>">
-    </div>
-    
-    <div>
-        <label for="time">Время нарушения *</label>
-        <input type="time" id="time" name="time" required 
-               value="<?php echo isset($_POST['time']) ? htmlspecialchars($_POST['time']) : ''; ?>">
-    </div>
-    
-    <button type="submit">Отправить заявление</button>
-</form>
-<p><a href="zayavka.php">Вернуться к списку заявлений</a></p>
+</div>
 
 <?php
 $pageContent = ob_get_clean();
