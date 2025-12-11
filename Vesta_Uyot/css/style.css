@@ -1,0 +1,126 @@
+/* style.css - дополнительные стили для статусов */
+
+/* Легенда статусов */
+.status-legend {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.status-badge {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.status-new {
+    background-color: #6c757d; /* серый - Новая заявка */
+}
+
+.status-completed {
+    background-color: #28a745; /* зеленый - Услуга оказана */
+}
+
+.status-cancelled {
+    background-color: #dc3545; /* красный - Услуга отменена */
+}
+
+/* Кастомные цвета для статусов */
+.bg-secondary {
+    background-color: #6c757d !important; /* серый */
+}
+
+.bg-success {
+    background-color: #28a745 !important; /* зеленый */
+}
+
+.bg-danger {
+    background-color: #dc3545 !important; /* красный */
+}
+
+/* Остальные стили... */
+body {
+    background-color: #f8f9fa;
+}
+
+.card-header.bg-primary {
+    background-color: #007bff !important;
+}
+
+.badge.bg-info {
+    background-color: #17a2b8 !important;
+}
+
+.badge.bg-warning {
+    background-color: #ffc107 !important;
+    color: #212529;
+}
+
+/* Анимации для карточек */
+.card {
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15) !important;
+}
+
+/* Специальные стили для навигации */
+.navbar-nav .nav-link {
+    padding: 0.5rem 1rem;
+}
+
+/* Стили для контейнера карточек в админке */
+.row-cols-lg-3 .card {
+    min-height: 100%;
+}
+
+/* Стили для полей форм в карточках */
+.form-control, .form-select {
+    border-color: #ced4da;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+/* Адаптивные отступы */
+@media (max-width: 768px) {
+    .navbar-nav {
+        text-align: center;
+    }
+    
+    .card {
+        margin-bottom: 1rem;
+    }
+    
+    .status-legend {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+}
+
+/* Стили для футера */
+footer {
+    margin-top: auto;
+}
+
+/* Дополнительные утилиты */
+.shadow-sm {
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075) !important;
+}
+
+.shadow {
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;
+}

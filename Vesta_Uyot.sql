@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost
--- Время создания: Дек 01 2025 г., 11:14
+-- Время создания: Дек 11 2025 г., 10:30
 -- Версия сервера: 10.4.32-MariaDB
 -- Версия PHP: 8.2.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- База данных: `NarusheniyamNet`
+-- База данных: `Vesta_Uyot`
 --
 
 -- --------------------------------------------------------
@@ -28,22 +28,17 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `service` (
-  `id_service` int(11) NOT NULL,
-  `car_number` varchar(20) NOT NULL,
-  `violation_description` text NOT NULL,
-  `address` text NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `data` date NOT NULL,
-  `time` time NOT NULL,
-  `status_id` int(11) NOT NULL DEFAULT 1
+  `id_service` int(1) NOT NULL,
+  `group` varchar(50) NOT NULL,
+  `spec` text NOT NULL,
+  `user_id` int(1) NOT NULL,
+  `start_data` date NOT NULL,
+  `end_data` date NOT NULL,
+  `status_id` int(1) NOT NULL,
+  `address_org` text NOT NULL,
+  `ruk_org` text NOT NULL,
+  `work_done` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Дамп данных таблицы `service`
---
-
-INSERT INTO `service` (`id_service`, `car_number`, `violation_description`, `address`, `user_id`, `data`, `time`, `status_id`) VALUES
-(1, 'o777oo790', 'пидр', 'чсспочпарпопр', 2, '2024-11-25', '12:35:00', 3);
 
 -- --------------------------------------------------------
 
@@ -61,9 +56,9 @@ CREATE TABLE `status` (
 --
 
 INSERT INTO `status` (`id_status`, `name_status`) VALUES
-(1, 'Новое заявление'),
-(2, 'Рассматривается'),
-(3, 'Услуга отменена');
+(1, 'На проверка'),
+(2, 'Принято'),
+(3, 'На доработку');
 
 -- --------------------------------------------------------
 
@@ -75,8 +70,9 @@ CREATE TABLE `user` (
   `id_user` int(1) NOT NULL,
   `surname` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
+  `group` varchar(50) NOT NULL,
+  `studbilet` varchar(50) NOT NULL,
   `otchestvo` varchar(50) NOT NULL,
-  `phone` bigint(11) NOT NULL,
   `email` varchar(50) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
@@ -87,11 +83,11 @@ CREATE TABLE `user` (
 -- Дамп данных таблицы `user`
 --
 
-INSERT INTO `user` (`id_user`, `surname`, `name`, `otchestvo`, `phone`, `email`, `username`, `password`, `user_type_id`) VALUES
-(1, 'Мирон', 'Артем', 'Сергеевич', 89776016667, 'kymuskrolik@gmail.com', 'copp', '5f4dcc3b5aa765d61d8327deb882cf99', 2),
-(2, 'test', 'test', 'test', 79999999999, 'test@mail.ru', 'test', '098f6bcd4621d373cade4e832627b4f6', 1),
-(4, 'Фамилия1', 'Имя1', 'Отчество1', 81111111111, 'Email@email.email', 'xDaer', '220466675e31b9d20c051d5e57974150', 1),
-(6, '9', '9', '9', 9, 'vgodz_s@mail.ru', '9', '45c48cce2e2d7fbdea1afc51c7c6ad26', 1);
+INSERT INTO `user` (`id_user`, `surname`, `name`, `group`, `studbilet`, `otchestvo`, `email`, `username`, `password`, `user_type_id`) VALUES
+(1, 'Жирнова', 'Юлия', 'Преподаватель', 'Преподаватель', 'Витальевна', 'ZhirnovaYUV@gmail.com', 'teacher', '2c8ade1dca7c5fa01cbceaf1e6bd654b', 2),
+(2, 'Мирон', 'Артем', 'ИСВ-23', '№ ИСВ23-16', 'Сергеевич', 'kymuskrolik@gmail.com', 'adminka', '5f4dcc3b5aa765d61d8327deb882cf99', 1),
+(3, 'тест', 'тест', 'тест', 'тест', 'тест', 'test@test.test', 'test', '098f6bcd4621d373cade4e832627b4f6', 1),
+(4, 'фывфыв', 'фывфыв', 'фывфыв', 'фывфыв', 'фывфыв', 'фывфыв', 'фывфыв', 'e927dc7852a98359f58fdf3889c002ce', 1);
 
 -- --------------------------------------------------------
 
@@ -121,8 +117,8 @@ INSERT INTO `user_type` (`id_user_type`, `name_user`) VALUES
 --
 ALTER TABLE `service`
   ADD PRIMARY KEY (`id_service`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `status_id` (`status_id`);
+  ADD KEY `status_id` (`status_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Индексы таблицы `status`
@@ -135,7 +131,6 @@ ALTER TABLE `status`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id_user`),
-  ADD UNIQUE KEY `username` (`username`),
   ADD KEY `user_type_id` (`user_type_id`);
 
 --
@@ -152,13 +147,19 @@ ALTER TABLE `user_type`
 -- AUTO_INCREMENT для таблицы `service`
 --
 ALTER TABLE `service`
-  MODIFY `id_service` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_service` int(1) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `status`
+--
+ALTER TABLE `status`
+  MODIFY `id_status` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_user` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT для таблицы `user_type`

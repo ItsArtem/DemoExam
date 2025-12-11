@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost
--- Время создания: Дек 08 2025 г., 21:41
+-- Время создания: Дек 01 2025 г., 11:15
 -- Версия сервера: 10.4.32-MariaDB
 -- Версия PHP: 8.2.12
 
@@ -143,9 +143,7 @@ INSERT INTO `user` (`id_user`, `surname`, `name`, `otchestvo`, `phone`, `email`,
 (4, 'Фамилия1', 'Имя1', 'Отчество1', 81111111111, 'Email@email.email', 'xDaer', '220466675e31b9d20c051d5e57974150', 1),
 (5, 'Фамилия1', 'Имя1', 'Отчество1', 81111111111, 'sadasd@email.email', 'фывыфв', 'f5bb0c8de146c67b44babbf4e6584cc0', 1),
 (6, '9', '9', '9', 9, 'vgodz_s@mail.ru', '9', '45c48cce2e2d7fbdea1afc51c7c6ad26', 1),
-(7, 'test11', 'test11', 'test11', 81111111111, '123123@ffdd.df', 'test1', '5a105e8b9d40e1329780d62ea2265d8a', 1),
-(8, 'testtt', 'testttt', 'testtttt', 79123456789, 'asds@asdas.as', 'test123', 'cc03e747a6afbbcbf8be7668acfebee5', 1),
-(9, 'testttd', 'sadasd', 'asdasd', 79123422289, 'asdasds@asddds.as', 'asdasd', 'a8f5f167f44f4964e6c998dee827110c', 1);
+(7, 'test11', 'test11', 'test11', 81111111111, '123123@ffdd.df', 'test1', '5a105e8b9d40e1329780d62ea2265d8a', 1);
 
 -- --------------------------------------------------------
 
@@ -220,7 +218,7 @@ ALTER TABLE `user_type`
 -- AUTO_INCREMENT для таблицы `pay_type`
 --
 ALTER TABLE `pay_type`
-  MODIFY `id_pay_type` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_pay_type` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `service`
@@ -238,7 +236,7 @@ ALTER TABLE `service_type`
 -- AUTO_INCREMENT для таблицы `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_user` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT для таблицы `user_type`
@@ -254,9 +252,10 @@ ALTER TABLE `user_type`
 -- Ограничения внешнего ключа таблицы `service`
 --
 ALTER TABLE `service`
-  ADD CONSTRAINT `service_ibfk_1` FOREIGN KEY (`service_type_id`) REFERENCES `service_type` (`id_service_type`),
-  ADD CONSTRAINT `service_ibfk_2` FOREIGN KEY (`status_id`) REFERENCES `status` (`id_status`),
-  ADD CONSTRAINT `service_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `user` (`id_user`);
+  ADD CONSTRAINT `service_ibfk_1` FOREIGN KEY (`pay_type_id`) REFERENCES `pay_type` (`id_pay_type`),
+  ADD CONSTRAINT `service_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id_user`),
+  ADD CONSTRAINT `service_ibfk_3` FOREIGN KEY (`service_type_id`) REFERENCES `service_type` (`id_service_type`),
+  ADD CONSTRAINT `service_ibfk_4` FOREIGN KEY (`status_id`) REFERENCES `status` (`id_status`);
 
 --
 -- Ограничения внешнего ключа таблицы `user`

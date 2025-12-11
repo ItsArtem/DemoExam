@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$db = mysqli_connect("localhost", "root", "", "Moy_ne_sam");
+$db = mysqli_connect("localhost", "root", "", "Moy_Ne_Sam");
 if (!$db) {
     die ("Ошибка подключения к базе данных");
 }
